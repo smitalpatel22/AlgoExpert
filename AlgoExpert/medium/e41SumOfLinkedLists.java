@@ -1,7 +1,5 @@
 package com.algoexpert.medium;
 
-import sun.awt.image.ImageWatched;
-
 public class e41SumOfLinkedLists {
     // This is an input class. Do not edit.
     public static class LinkedList {
@@ -110,5 +108,59 @@ public class e41SumOfLinkedLists {
         LinkedList.addMany(ll2, new int[] {4, 5});
 
         sumOfLinkedLists(ll1, ll2);
+        
+            
+    //     # - a and b are arrays of ints that represent a big number 
+    //     # - each element will be from 0 to 9 
+    //     # - a and b will be the same size / length 
+    //     # - return the result of adding a and b together, also in the format of an array of ints
+
+
+    //     #  [0, 2, 1] a
+    //     # +[1, 3, 9] b
+    //     #  ----------
+    //     #  [1, 6, 0]  
+
+          List<Integer> a = new ArrayList<>();
+          List<Integer> b = new ArrayList<>();
+          a.add(9);
+          a.add(2);
+          a.add(1);
+          b.add(1);
+          b.add(3);
+          b.add(9);
+
+        // [1, 0, 6, 0]
+
+         System.out.println(add_big_ints(a,b));
     }
+    
+
+    
+      public static List<Integer> add_big_ints(List<Integer> a, List<Integer> b) {
+          List<Integer> result = new ArrayList<>(); 
+
+          Collections.reverse(a);
+          Collections.reverse(b);
+
+
+          int carry = 0;
+
+          int idx = 0;
+          while(idx<a.size() || idx<b.size() || carry !=0) {
+              int valueOne = idx < a.size() ? a.get(idx) : 0;
+              int valueTwo = idx < b.size() ? b.get(idx) : 0;
+
+              int sum = valueOne + valueTwo + carry;
+
+              int newValue = sum % 10;
+
+              result.add(newValue);
+
+              carry = sum /10;
+              idx++;
+          }
+          Collections.reverse(result);
+          return result;
+      }
 }
